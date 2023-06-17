@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:welcome/screens/profileList.dart';
 
 import '../components/myDrawer.dart';
 import '../constants.dart';
@@ -19,7 +20,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ProfileList()));
+        },
         backgroundColor: kPrimaryColor,
         child: Icon(Icons.person_add_alt_1),
       ),
