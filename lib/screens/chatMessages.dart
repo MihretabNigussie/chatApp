@@ -6,13 +6,17 @@ enum MessageStatus { not_sent, not_view, viewed }
 
 class ChatMessage {
   late final String text;
+  final Image? image;
   final MessageStatus messageStatus;
   final bool isSender;
+  final bool isText;
 
   ChatMessage({
     this.text = '',
+    this.image,
     required this.messageStatus,
     required this.isSender,
+    required this.isText,
   });
 }
 
@@ -21,97 +25,124 @@ List chatMessage = [
     text: 'Hi Birke',
     messageStatus: MessageStatus.viewed,
     isSender: true,
+    isText: true,
   ),
   ChatMessage(
     text: 'Hi Gete',
     messageStatus: MessageStatus.viewed,
     isSender: false,
+    isText: true,
   ),
   ChatMessage(
     text: 'Endet nesh baksh',
     messageStatus: MessageStatus.viewed,
     isSender: true,
+    isText: true,
   ),
   ChatMessage(
     text: 'Kibru yisfa.. anchis',
     messageStatus: MessageStatus.viewed,
     isSender: false,
+    isText: true,
   ),
   ChatMessage(
     text: 'Alehulish birke.. balsh endet new',
     messageStatus: MessageStatus.viewed,
     isSender: true,
+    isText: true,
   ),
   ChatMessage(
     text: 'dena new.. yanchis derbew',
     messageStatus: MessageStatus.viewed,
     isSender: false,
+    isText: true,
   ),
   ChatMessage(
     text: 'Minabatu yihonal blesh new ene eyalehulet',
     messageStatus: MessageStatus.viewed,
     isSender: true,
+    isText: true,
   ),
   ChatMessage(
     text: 'hahaha.. ay gete',
     messageStatus: MessageStatus.viewed,
     isSender: false,
+    isText: true,
   ),
   ChatMessage(
     text: 'hahaha.. ay birke',
     messageStatus: MessageStatus.viewed,
     isSender: true,
+    isText: true,
   ),
   ChatMessage(
     text: 'anchi meches ayalkbshm',
     messageStatus: MessageStatus.viewed,
     isSender: false,
+    isText: true,
   ),
   ChatMessage(
     text: 'weregna eyalshign new??',
     messageStatus: MessageStatus.viewed,
     isSender: true,
+    isText: true,
   ),
   ChatMessage(
     text: 'ere anchi setiyo ende endeza alalkum',
     messageStatus: MessageStatus.viewed,
     isSender: false,
+    isText: true,
   ),
   ChatMessage(
     text: 'alsh enji..bey chaw enjeraye arere',
     messageStatus: MessageStatus.viewed,
     isSender: true,
+    isText: true,
   ),
   ChatMessage(
     text: 'ere anchi setiyo ende endeza alalkum',
     messageStatus: MessageStatus.viewed,
     isSender: false,
+    isText: true,
   ),
   ChatMessage(
     text: 'weregna eyalshign new??',
     messageStatus: MessageStatus.viewed,
     isSender: true,
+    isText: true,
   ),
   ChatMessage(
     text: 'anchi meches ayalkbshm',
     messageStatus: MessageStatus.viewed,
     isSender: false,
+    isText: true,
   ),
   ChatMessage(
     text: 'hahaha.. ay birke',
     messageStatus: MessageStatus.viewed,
     isSender: true,
+    isText: true,
   ),
   ChatMessage(
     text: 'hahaha.. ay gete',
     messageStatus: MessageStatus.viewed,
     isSender: false,
+    isText: true,
+  ),
+  ChatMessage(
+    isText: false,
+    messageStatus: MessageStatus.viewed,
+    isSender: true,
+    image: Image(image: AssetImage('assets/proPic3.jpg')),
   ),
   ChatMessage(
     text: 'hahaha.. ay birke',
     messageStatus: MessageStatus.viewed,
     isSender: true,
+    isText: true,
   ),
+  ChatMessage(
+      messageStatus: MessageStatus.viewed, isSender: true, isText: false)
 ];
 
 class Body extends StatelessWidget {
@@ -159,39 +190,52 @@ class _MessagesState extends State<Messages> {
             : MainAxisAlignment.start,
         children: [
           GestureDetector(
-            onTapDown: (details) {
-              _showPopupMenu(context, details.globalPosition);
-            },
-            onLongPress: () {
-              _showEditDialog(context);
-            },
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-              decoration: BoxDecoration(
-                color: widget.message.isSender
-                    ? hexStringToColor('CB2B93')
-                    : hexStringToColor('5E61F4'),
-                borderRadius: widget.message.isSender
-                    ? BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(3),
-                      )
-                    : BorderRadius.only(
-                        topLeft: Radius.circular(3),
-                        topRight: Radius.circular(30),
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30),
+              onTapDown: (details) {
+                _showPopupMenu(context, details.globalPosition);
+              },
+              onLongPress: () {
+                _showEditDialog(context);
+              },
+              child: widget.message.isText
+                  ? Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: widget.message.isSender
+                            ? hexStringToColor('CB2B93')
+                            : hexStringToColor('5E61F4'),
+                        borderRadius: widget.message.isSender
+                            ? BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                topRight: Radius.circular(30),
+                                bottomLeft: Radius.circular(30),
+                                bottomRight: Radius.circular(3),
+                              )
+                            : BorderRadius.only(
+                                topLeft: Radius.circular(3),
+                                topRight: Radius.circular(30),
+                                bottomLeft: Radius.circular(30),
+                                bottomRight: Radius.circular(30),
+                              ),
                       ),
-              ),
-              child: Text(
-                _editedText.isNotEmpty ? _editedText : widget.message.text,
-                style: TextStyle(fontSize: 15, color: Colors.white),
-              ),
-            ),
-          ),
+                      child: Text(
+                        _editedText.isNotEmpty
+                            ? _editedText
+                            : widget.message.text,
+                        style: TextStyle(fontSize: 15, color: Colors.white),
+                      ),
+                    )
+                  : SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.55,
+                      child: AspectRatio(
+                        aspectRatio: 1.6,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: widget.message.image,
+                        ),
+                      ),
+                    )),
         ],
       ),
     );

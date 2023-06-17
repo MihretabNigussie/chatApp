@@ -21,7 +21,7 @@ class _MessageScreenState extends State<MessageScreen> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.0),
+        preferredSize: Size.fromHeight(60.0),
         child: AppBar(
             backgroundColor: kContentColorLightTheme,
             title: Row(
@@ -38,7 +38,7 @@ class _MessageScreenState extends State<MessageScreen> {
                     );
                   },
                   child: CircleAvatar(
-                    radius: screen.width * 0.06,
+                    radius: screen.width * 0.05,
                     backgroundImage: AssetImage('assets/birke.jpg'),
                   ),
                 ),
@@ -102,42 +102,42 @@ class _MessageScreenState extends State<MessageScreen> {
                       },
                     ),
                   ),
-                  PopupMenuItem(
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.block_outlined,
-                      ),
-                      title: Text('Block user'),
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Confirm Action'),
-                              content: Text(
-                                  'Are you sure you want to block this user?'),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: Text('Cancel'),
-                                  onPressed: () {
-                                    // Close the dialog box
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                TextButton(
-                                  child: Text(
-                                    'Block',
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
+                  // PopupMenuItem(
+                  //   child: ListTile(
+                  //     leading: Icon(
+                  //       Icons.block_outlined,
+                  //     ),
+                  //     title: Text('Block user'),
+                  //     onTap: () {
+                  //       showDialog(
+                  //         context: context,
+                  //         builder: (BuildContext context) {
+                  //           return AlertDialog(
+                  //             title: Text('Confirm Action'),
+                  //             content: Text(
+                  //                 'Are you sure you want to block this user?'),
+                  //             actions: <Widget>[
+                  //               TextButton(
+                  //                 child: Text('Cancel'),
+                  //                 onPressed: () {
+                  //                   // Close the dialog box
+                  //                   Navigator.of(context).pop();
+                  //                 },
+                  //               ),
+                  //               TextButton(
+                  //                 child: Text(
+                  //                   'Block',
+                  //                   style: TextStyle(color: Colors.red),
+                  //                 ),
+                  //                 onPressed: () {},
+                  //               ),
+                  //             ],
+                  //           );
+                  //         },
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
                 ],
                 icon: Icon(Icons.more_vert),
               )
