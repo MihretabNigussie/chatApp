@@ -3,6 +3,7 @@ import 'package:welcome/screens/chatMessages.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import '../constants.dart';
 import 'imageScreen.dart';
+import 'package:image_picker/image_picker.dart';
 
 class MessageScreen extends StatefulWidget {
   const MessageScreen({super.key});
@@ -170,11 +171,15 @@ class _MessageScreenState extends State<MessageScreen> {
                           ),
                           Positioned(
                             right: 0,
-                            bottom: screen.width * 0.005,
+                            bottom: screen.width * 0.01,
                             child: IconButton(
-                              icon: Icon(Icons.emoji_emotions),
-                              onPressed: () {
-                                showEmojiPicker(context);
+                              icon: Icon(Icons.photo_library_outlined),
+                              onPressed: () async {
+                                final pickedFile = await ImagePicker()
+                                    .pickImage(source: ImageSource.gallery);
+                                if (pickedFile != null) {
+                                  // Do something with the selected file, such as display it in your app.
+                                }
                               },
                             ),
                           ),
