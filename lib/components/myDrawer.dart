@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
+import '../screens/profileScreen.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -47,7 +48,10 @@ class _MyDrawerState extends State<MyDrawer> {
           leading: Icon(Icons.person_outline),
           title: Text("Profile"),
           onTap: () {
-            Navigator.pop(context);
+             Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => UserProfile()),
+  );
             // Navigate to home screen
           },
         ),
